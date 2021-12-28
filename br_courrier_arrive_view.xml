@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem id="main_menu_bureau" name="Bureau d'ordre" />
+
+
+        <record id="br_courrier_arrive_form_view" model="ir.ui.view">
+            <field name="name">br.courrier_arrive.form</field>
+            <field name="model">br.courrier_arrive</field>
+            <field name="arch" type="xml">
+                <form string="Courrier Arrive" version="7.0">
+                    <header>
+                        <field name="state" widget='statusbar' statusbar_visible='' />  
+                        <button name='send_directeur' string='envoyer au directeur' states='draft' type="workflow" class="oe_highlight"/>
+						<button name='approve' string='Approuver' states='waiting' type="workflow" class="oe_highlight"/>
+						<button name='deliver' string='delivrer' states='approuved' type="workflow" class="oe_highlight"/>
+						
+                    </header>
+                    <sheet>
+                        <notebook>
+                            <page string="Infos courrier_arrive">
+                                <group>
+                                    <field name="code" />
+                                    <field name="date" />
+                                    <field name="expediteur" />
+                                    <field name="destinataire" />
+                                    <field name="adresse" />
+                                    <field name="objet" />
+                                    <field name="pj" />
+                                    <field name="contenu" />
+                                    <field name="transmission" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="br_courrier_arrive_tree">
+            <field name="name">br.courrier_arrive.tree</field>
+            <field name="model">br.courrier_arrive</field>
+            <field name="type">tree</field> 
+
+
+            <field name="arch" type="xml">
+                <tree string="Infos courrier_arrive">
+                    <field name="code" />
+                    <field name="date" />
+                    <field name="expediteur" />
+                    <field name="destinataire" />
+                    <field name="adresse" />
+                    <field name="objet" />
+                    <field name="pj" />
+                    <field name="contenu" />
+                    <field name="transmission" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_courrier_arrive_seq">
+            <field name="name">action courrier_arrive</field>
+            <field name="res_model">br.courrier_arrive</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Menu des courrier_arrives" id="section_main_menu_courrier_arrive" parent="main_menu_bureau" />
+        <menuitem name="courrier_arrives" id="real_menu_courrier_arrive" parent="section_main_menu_courrier_arrive" action="action_courrier_arrive_seq" />
+
+    </data>
+</openerp>

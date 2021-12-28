@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem id="main_menu_bureau" name="Bureau d'ordre" />
+
+        <record id="br_departement_form_view" model="ir.ui.view">
+            <field name="name">br.departement.form</field>
+            <field name="model">br.departement</field>
+            <field name="arch" type="xml">
+                <form string="departement" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="Infos departement">
+                                <group>
+                                    <field name="code" />
+                                    <field name="name" />
+                                    <field name="manager" />
+                                    <field name="tel" />
+                                    <field name="email" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="br_departement_tree">
+            <field name="name">br.departement.tree</field>
+            <field name="model">br.departement</field>
+            <field name="type">tree</field>
+
+
+            <field name="arch" type="xml">
+                <tree string="Infos departement">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="manager" />
+                    <field name="tel" />
+                    <field name="email" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_departement_seq">
+            <field name="name">action departement</field>
+            <field name="res_model">br.departement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Menu des Departements" id="section_main_menu_departement" parent="main_menu_bureau" />
+        <menuitem name="Departements" id="real_menu_departement" parent="section_main_menu_departement" action="action_departement_seq" />
+
+    </data>
+</openerp>

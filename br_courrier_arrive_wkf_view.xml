@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--Definition -->
+        <record model="workflow" id="br_courrier_arrive_wkf">
+            <field name="name">br.courrier_arrive.wkf</field>
+            <field name="osv">br.courrier_arrive</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <!--Activities -->
+        <record model="workflow.activity" id="br_courrier_arrive_wkf_act_draft">
+			<field name="wkf_id" ref="br_courrier_arrive_wkf" />
+			<field name="flow_start">True</field>
+			<field name="name">Draft</field>
+			<field name="kind">function</field>
+			<field name="action">_draft_fcn()</field>
+		</record>
+
+		<record model="workflow.activity" id="br_courrier_arrive_wkf_act_waiting">
+			<field name="wkf_id" ref="br_courrier_arrive_wkf" />
+			<field name="name">Waiting</field>
+			<field name="kind">function</field>
+			<field name="action">_waiting_fcn()</field>
+		</record>
+
+        <record model="workflow.activity" id="br_courrier_arrive_wkf_act_approved">
+			<field name="wkf_id" ref="br_courrier_arrive_wkf" />
+			<field name="name">Approved</field>
+			<field name="kind">function</field>
+			<field name="action">_approuved_fcn()</field>
+		</record>
+
+		<record model="workflow.activity" id="br_courrier_arrive_wkf_act_delivered">
+			<field name="wkf_id" ref="br_courrier_arrive_wkf" />
+			<field name="name">Delivered</field>
+			<field name="kind">function</field>
+            <field name="flow_stop">True</field>
+			<field name="action">_delivered_fcn()</field>
+		</record>
+
+        <!--transition -->
+        <record model="workflow.transition" id="br_courrier_arrive_wkf_tr1">
+            <field name="act_from" ref="br_courrier_arrive_wkf_act_draft"/>
+            <field name="act_to" ref="br_courrier_arrive_wkf_act_waiting"/>
+            <field name="signal">send_directeur</field>
+        </record>
+
+
+        <record model="workflow.transition" id="br_courrier_arrive_wkf_tr2">
+			<field name="act_from" ref="br_courrier_arrive_wkf_act_waiting" />
+			<field name="act_to" ref="br_courrier_arrive_wkf_act_approved" />
+			<field name="signal">approve</field>
+		</record>
+		<record model="workflow.transition" id="br_courrier_arrive_wkf_tr3">
+			<field name="act_from" ref="br_courrier_arrive_wkf_act_approved" />
+			<field name="act_to" ref="br_courrier_arrive_wkf_act_delivered" />
+			<field name="signal">deliver</field>
+		</record>
+		
+    </data>
+
+</openerp>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem id="main_menu_bureau" name="Bureau d'ordre" />
+
+        <record id="br_organisation_form_view" model="ir.ui.view">
+            <field name="name">br.organisation.form</field>
+            <field name="model">br.organisation</field>
+            <field name="arch" type="xml">
+                <form string="organisation" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="Infos organisation">
+                                <group>
+                                    <field name="code" />
+                                    <field name="name" />
+                                    <field name="adresse" />
+                                    <field name="tel" />
+                                    <field name="email" />
+                                    <field name="siteweb" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="br_organisation_tree">
+            <field name="name">br.organisation.tree</field>
+            <field name="model">br.organisation</field>
+            <field name="type">tree</field>
+
+
+            <field name="arch" type="xml">
+                <tree string="Infos organisation">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="adresse" />
+                    <field name="tel" />
+                    <field name="email" />
+                    <field name="siteweb" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_organisation_seq">
+            <field name="name">action organisation</field>
+            <field name="res_model">br.organisation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Menu des organisations" id="section_main_menu_organisation" parent="main_menu_bureau" />
+        <menuitem name="organisations" id="real_menu_organisation" parent="section_main_menu_organisation" action="action_organisation_seq" />
+
+    </data>
+</openerp>
